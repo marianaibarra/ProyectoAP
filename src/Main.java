@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.util.Scanner;
 import LinkedList.*;
+import CIrcleList.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,6 +12,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
         do {
+
             String menu = "Menú:\n" +
                     "1. Insertar al inicio\n" +
                     "2. Insertar al final\n" +
@@ -23,7 +25,9 @@ public class Main {
                     "9. Eliminar\n"+
                     "10. Distributiva\n"+
                     "11. Intercalado\n"+
-                    "12. Salir";
+                    "12. Comparar listas\n"+
+                    "13. Porcentaje de menores al dato\n"+
+                    "14. Salir";
 
             String opcio = JOptionPane.showInputDialog(null, menu, "Menú de Opciones", JOptionPane.INFORMATION_MESSAGE);
             opcion = Integer.parseInt(opcio);
@@ -135,10 +139,35 @@ public class Main {
                     nuevaLista3.mostrarLista();
                     break;
                 case 12:
+                    nuevaLista1.compararListas(nuevaLista2);
+                    break;
+                case 13:
+                    String menor = "¿En qué lista desea comparar el dato?\n" +
+                            "1. Lista 1\n" +
+                            "2. Lista 2\n";
+                    String porcent = JOptionPane.showInputDialog(null, menor, "Menú de Opciones", JOptionPane.INFORMATION_MESSAGE);
+                    int Listaporcent = Integer.parseInt(porcent);
+                    String menores = JOptionPane.showInputDialog("Ingrese dato a comparar");
+                    dato = Integer.parseInt(menores);
+                    if (Listaporcent == 1) nuevaLista1.porcentajeMen(dato);
+                    if (Listaporcent == 2) nuevaLista2.porcentajeMen(dato);
+                    break;
+                case 14:
+                    ListaCircular a = new ListaCircular();
+                    a.insertarFinal(5);
+                    a.insertarFinal(4);
+                    a.insertarFinal(3);
+                    a.insertarFinal(2);
+                    a.insertarFinal(1);
+                    break;
+                case 15:
                     JOptionPane.showMessageDialog(null, "Salir");
                     break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Opción inválida, vuelva a intentarlo");
+                    break;
             }
-        } while (opcion != 12);
+        } while (opcion != 15);
 
         scan.close();
     }
