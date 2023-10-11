@@ -75,11 +75,11 @@ public class Lista {
         Nodo x = new Nodo(dato);
         if (P != Q) Q.setLigaD(x);
         x.setLigaD(P);
+        x.setLigaI(Q);
         if (P == Q) this.punta = x;
     }
 
     public void insertarFinal(int dato) {
-
         if (punta == null) {
             Nodo nuevo = new Nodo(dato);
             punta = nuevo;
@@ -90,6 +90,7 @@ public class Lista {
             }
             Nodo nuevo = new Nodo(dato);
             aux.setLigaD(nuevo);
+            nuevo.setLigaI(aux);
         }
     }
 
@@ -158,6 +159,14 @@ public class Lista {
             }
         }
         if(!found) JOptionPane.showMessageDialog(null, "El dato no se encontró en la lista");
+    }
+    public void Eliminar(Nodo X){
+
+        Nodo A = X.getLigaI();
+        Nodo B = X.getLigaD();
+
+        B.setLigaI(A);
+        A.setLigaD(B);
     }
     public void Distribuir(Lista A, Lista B) {
         Nodo P = A.punta;
@@ -240,5 +249,21 @@ public class Lista {
         int porcentajeM = (contadorMen * 100) / contador;
         String mensaje = "El porcentaje de números menores es: " + String.valueOf(porcentajeM) + "%.\n";
         JOptionPane.showMessageDialog(null, mensaje);
+    }
+    public void eliminarConsecutivos () {
+        if(this.punta == null) return;
+        Nodo P = this.punta;
+        Nodo Q = P.getLigaD();
+        Nodo aux = null;
+
+        while (Q != null) {
+            if (P.getDato() == Q.getDato()){
+                aux = Q;
+                Q = Q.getLigaD();
+                this.Eliminar(aux);
+            }
+            P = P.getLigaD();
+            Q = Q.getLigaD();
+        }
     }
 }

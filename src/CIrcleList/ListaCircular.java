@@ -27,7 +27,6 @@ public class ListaCircular {
             this.punta = X;
             X.setLigaD(X);
             X.setLigaI(X);
-            this.mostrarListaCircular();
             return;
         }
         Nodo P = this.punta;
@@ -40,8 +39,6 @@ public class ListaCircular {
         Q.setLigaD(X);
         X.setLigaI(Q);
         X.setLigaD(P);
-        this.mostrarListaCircular();
-
     }
 
     public void insertarRellenado (int veces, int dato) {
@@ -52,6 +49,7 @@ public class ListaCircular {
         insertarFinal(dato);
     }
     public void mostrarListaCircular (){
+        if(this.punta == null) return;
         Nodo P = this.punta;
         int i = 0;
         do {
@@ -89,8 +87,6 @@ public class ListaCircular {
                 }
                 P = P.getLigaD();
             }
-        } while (P != this.punta);
-
-        this.mostrarListaCircular();
+        } while (P != this.punta && posicion < this.tamano);
     }
 }

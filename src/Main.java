@@ -29,7 +29,8 @@ public class Main {
                     "13. Porcentaje de menores al dato\n"+
                     "14. Insertar final (lista circular) \n"+
                     "15. Insertar dato en posición (Lista circular)\n"+
-                    "16. Salir";
+                    "16. Eliminar consecutivos \n"+
+                    "17. Salir";
 
             String opcio = JOptionPane.showInputDialog(null, menu, "Menú de Opciones", JOptionPane.INFORMATION_MESSAGE);
             opcion = Integer.parseInt(opcio);
@@ -57,13 +58,14 @@ public class Main {
 
                     if (listaInsertarFinal == 1) nuevaLista1.insertarFinal(dato);
                     if (listaInsertarFinal == 2) nuevaLista2.insertarFinal(dato);
-
                     break;
                 case 3:
                     JOptionPane.showMessageDialog(null, "Lista 1:\n");
                     nuevaLista1.mostrarLista();
                     JOptionPane.showMessageDialog(null, "Lista 2:\n");
                     nuevaLista2.mostrarLista();
+                    JOptionPane.showMessageDialog(null, "Lista Circular:\n");
+                    listaCircular.mostrarListaCircular();
                     break;
                 case 4:
                     String ordenar = "¿Qué lista desea ordenar?\n" +
@@ -168,14 +170,23 @@ public class Main {
                     listaCircular.ingresarEnPosicion(posicN, datoI);
                     break;
                 case 16:
+                    String Eliminar_consecutivo = "¿En qué lista desea eliminar?\n" +
+                            "1. Lista 1\n" +
+                            "2. Lista 2\n";
+                    String lista_eliminar = JOptionPane.showInputDialog(null, Eliminar_consecutivo, "Menú de Opciones", JOptionPane.INFORMATION_MESSAGE);
+                    int opcionEliminar = Integer.parseInt(lista_eliminar);
+
+                    if (opcionEliminar == 1) nuevaLista1.eliminarConsecutivos();
+                    if (opcionEliminar == 2) nuevaLista2.eliminarConsecutivos();
+                    break;
+                case 17:
                     JOptionPane.showMessageDialog(null, "Salir");
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Opción inválida, vuelva a intentarlo");
                     break;
             }
-        } while (opcion != 16);
-
+        } while (opcion != 17);
         scan.close();
     }
 }
