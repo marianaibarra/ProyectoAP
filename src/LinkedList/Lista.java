@@ -176,45 +176,6 @@ public class Lista {
             Q = Q.getLigaD();
         }
     }
-
-    public void compararListas(Lista B) {
-        if(this.punta == null || B.punta == null) return;
-
-        Nodo A = this.punta;
-        Nodo X = B.punta;
-        boolean esTamanoIgual = false, esDatoIgual = false;
-
-        do {
-            esDatoIgual = false;
-            esDatoIgual = A.getDato() == X.getDato();
-            A = A.getLigaD();
-            X = X.getLigaD();
-            esTamanoIgual = A != null || X != null;
-            if( A == null && X == null) esTamanoIgual = true;
-        } while( esTamanoIgual && esDatoIgual && (A != null || X != null) );
-
-        if ( esTamanoIgual && esDatoIgual )
-            JOptionPane.showMessageDialog(null, "Las listas son iguales");
-        else
-            JOptionPane.showMessageDialog(null, "Las listas no son iguales");
-
-    }
-    public void porcentajeMen (int dato) {
-        if(this.punta == null) return;
-        int contador = 0;
-        int contadorMen = 0;
-        Nodo P = punta;
-        while (P != null){
-            if (P.getDato() < dato) contadorMen++;
-            contador ++;
-            P = P.getLigaD();
-        }
-        int porcentajeM = (contadorMen * 100) / contador;
-        String mensaje = "Porcentaje: " + String.valueOf(porcentajeM);
-        JOptionPane.showMessageDialog(null, mensaje);
-
-    }
-
     public void intercalar (Lista L1, Lista L2)
     {
         Nodo P = L1.punta;
@@ -244,5 +205,40 @@ public class Lista {
 
         }
 
+    }
+    public void compararListas(Lista B) {
+        if(this.punta == null || B.punta == null) return;
+
+        Nodo P = this.punta;
+        Nodo Q = B.punta;
+        boolean esTamanoIgual = false, esDatoIgual = false;
+
+        do {
+            esDatoIgual = P.getDato() == P.getDato();
+            P = P.getLigaD();
+            Q = Q.getLigaD();
+            esTamanoIgual = P != null && Q != null;
+            if( P == null && Q == null) esTamanoIgual = true;
+        } while( esTamanoIgual && esDatoIgual && (P != null || Q != null) );
+
+        if ( esTamanoIgual && esDatoIgual )
+            JOptionPane.showMessageDialog(null, "Las listas son iguales");
+        else
+            JOptionPane.showMessageDialog(null, "Las listas no son iguales");
+
+    }
+    public void porcentajeMen (int dato) {
+        if(this.punta == null) return;
+        int contador = 0;
+        int contadorMen = 0;
+        Nodo P = punta;
+        while (P != null){
+            if (P.getDato() < dato) contadorMen++;
+            contador ++;
+            P = P.getLigaD();
+        }
+        int porcentajeM = (contadorMen * 100) / contador;
+        String mensaje = "El porcentaje de números menores es: " + String.valueOf(porcentajeM) + "%.\n";
+        JOptionPane.showMessageDialog(null, mensaje);
     }
 }

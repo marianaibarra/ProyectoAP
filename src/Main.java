@@ -9,10 +9,10 @@ public class Main {
         Lista nuevaLista1 = new Lista();
         Lista nuevaLista2 = new Lista();
         Lista nuevaLista3 = new Lista();
+        ListaCircular listaCircular = new ListaCircular();
         Scanner scan = new Scanner(System.in);
 
         do {
-
             String menu = "Menú:\n" +
                     "1. Insertar al inicio\n" +
                     "2. Insertar al final\n" +
@@ -27,7 +27,9 @@ public class Main {
                     "11. Intercalado\n"+
                     "12. Comparar listas\n"+
                     "13. Porcentaje de menores al dato\n"+
-                    "14. Salir";
+                    "14. Insertar final (lista circular) \n"+
+                    "15. Insertar dato en posición (Lista circular)\n"+
+                    "16. Salir";
 
             String opcio = JOptionPane.showInputDialog(null, menu, "Menú de Opciones", JOptionPane.INFORMATION_MESSAGE);
             opcion = Integer.parseInt(opcio);
@@ -153,21 +155,26 @@ public class Main {
                     if (Listaporcent == 2) nuevaLista2.porcentajeMen(dato);
                     break;
                 case 14:
-                    ListaCircular a = new ListaCircular();
-                    a.insertarFinal(5);
-                    a.insertarFinal(4);
-                    a.insertarFinal(3);
-                    a.insertarFinal(2);
-                    a.insertarFinal(1);
+                    String datoListaCircular = JOptionPane.showInputDialog("Inserte el dato");
+                    int datoLC = Integer.parseInt(datoListaCircular);
+
+                    listaCircular.insertarFinal(datoLC);
                     break;
                 case 15:
+                    String posicion = JOptionPane.showInputDialog("¿En que posición desea ingresar? (Index: 0) \n");
+                    int posicN = Integer.parseInt(posicion);
+                    String datoIngresar = JOptionPane.showInputDialog("Inserte dato");
+                    int datoI = Integer.parseInt(datoIngresar);
+                    listaCircular.ingresarEnPosicion(posicN, datoI);
+                    break;
+                case 16:
                     JOptionPane.showMessageDialog(null, "Salir");
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Opción inválida, vuelva a intentarlo");
                     break;
             }
-        } while (opcion != 15);
+        } while (opcion != 16);
 
         scan.close();
     }

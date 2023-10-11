@@ -12,62 +12,85 @@ public class ListaCircular {
 
     public void insertarPosicionado (Nodo P, int dato) {
         Nodo X = new Nodo(dato);
+        this.tamano++;
+
         Nodo aux = P.getLigaD();
-        P.setLigaD(X);
         X.setLigaI(P);
         X.setLigaD(aux);
+        P.setLigaD(X);
     }
 
     public void insertarFinal (int dato) {
+        if(this.punta == null) {
+            Nodo X = new Nodo(dato);
+            this.tamano++;
+            this.punta = X;
+            X.setLigaD(X);
+            X.setLigaI(X);
+            this.mostrarListaCircular();
+            return;
+        }
         Nodo P = this.punta;
         Nodo Q = P.getLigaI();
 
         Nodo X = new Nodo(dato);
         this.tamano++;
 
-        X.setLigaD(P);
-        X.setLigaI(Q);
         P.setLigaI(X);
         Q.setLigaD(X);
+        X.setLigaI(Q);
+        X.setLigaD(P);
+        this.mostrarListaCircular();
+
     }
 
     public void insertarRellenado (int veces, int dato) {
-        Nodo P = this.punta;
-        P = P.getLigaI();
 
         for (int i = 0; i < veces; i++){
             insertarFinal(0);
         }
         insertarFinal(dato);
     }
+    public void mostrarListaCircular (){
+        Nodo P = this.punta;
+        int i = 0;
+        do {
+            System.out.print(i + "-> " + P.getDato() + "\n");
+            i++;
+            P = P.getLigaD();
+        } while(P != this.punta);
+    }
     public void ingresarEnPosicion(int posicion, int dato) {
         if(this.punta == null) return;
-        // Suponiendo que el usuario ingresa la posicion con el indice iniciando en 1.
+        // Se supone usuario ingresa con índice inicial en 0.
 
-        posicion--;
         int i = 0;
         Nodo P = this.punta;
         do {
             if(posicion < this.tamano){
-                if (posicion == i) {
-                    insertarPosicionado(P, dato);
+                if (posicion > i) {
+                    i++;
+                    P = P.getLigaD();
                 }
-            }else if(posicion == this.tamano) {
-                 insertarFinal(dato);
-            }else{
-                String menor = "¿Desea rellenar de 0 o insertar al final? \n" +
-                        "1. Rellenar \n" +
-                        "2. Insertar Final 2\n";
-                String porcent = JOptionPane.showInputDialog(null, menor, "Menú de Opciones", JOptionPane.INFORMATION_MESSAGE);
-                int Listaporcent = Integer.parseInt(porcent);
-                switch (Listaporcent){
+                else if (posicion == i) insertarPosicionado(P, dato);
+            } else {
+                String mensaje = "¿Desea rellenar de 0 o insertar al final? \n" +
+                        "1. Rellenar lista \n" +
+                        "2. Insertar dato al final \n";
+                String opcion = JOptionPane.showInputDialog(null, mensaje, "Elección", JOptionPane.INFORMATION_MESSAGE);
+                int OpcInt = Integer.parseInt(opcion);
+                switch (OpcInt){
                     case 1:
-                        insertarRellenado(tamano - posicion, dato);
+                        insertarRellenado(posicion - this.tamano, dato);
                         break;
                     case 2:
                         insertarFinal(dato);
+                        break;
                 }
+                P = P.getLigaD();
             }
-        } while (P != punta);
+        } while (P != this.punta);
+
+        this.mostrarListaCircular();
     }
 }
