@@ -10,6 +10,39 @@ public class ListaCircular {
         this.tamano = 0;
     }
 
+    public Nodo getPunta() {
+        return punta;
+    }
+
+    public void setPunta(Nodo punta) {
+        this.punta = punta;
+    }
+
+    public void insertarInicio(int dato)
+    {
+        Nodo X = new Nodo(dato);
+        if(this.punta == null)
+        {
+            this.punta = X;
+            this.tamano++;
+            X.setLigaD(X);
+            X.setLigaI(X);
+            return;
+        }
+        else
+        {
+            X.setLigaD(this.punta);
+            this.punta.setLigaI(X);
+        }
+        Nodo P = this.punta;
+        while (P.getLigaD()!= this.punta)
+        {
+            P = P.getLigaD();
+        }
+        this.punta = X;
+        P.setLigaD(this.punta);
+    }
+
     public void insertarPosicionado (Nodo P, int dato) {
         Nodo X = new Nodo(dato);
         this.tamano++;
@@ -88,5 +121,60 @@ public class ListaCircular {
                 P = P.getLigaD();
             }
         } while (P != this.punta && posicion < this.tamano);
+    }
+    public void insertarRaro(ListaCircular A, ListaCircular B)
+    {
+        Nodo P = A.punta;
+        Nodo Q = B.punta.getLigaI();
+
+        do
+        {
+            insertarFinal(P.getDato());
+            insertarFinal(Q.getDato());
+            P = P.getLigaD();
+            Q = Q.getLigaI();
+
+        } while(P != A.punta && Q != B.punta.getLigaI());
+
+        if (P == A.punta);
+        {
+            boolean inicio = true;
+            while (Q != B.punta.getLigaI())
+            {
+                if (inicio)
+                {
+                    insertarInicio(Q.getDato());
+                    inicio = false;
+                    Q = Q.getLigaI();
+                }
+                else
+                {
+
+                    insertarFinal(Q.getDato());
+                    inicio = true;
+                    Q = Q.getLigaI();
+
+                }
+            }
+        }
+        if (Q == B.punta.getLigaI())
+        {
+            boolean inicio = true;
+            while (P != A.punta)
+            {
+                if (inicio)
+                {
+                    insertarInicio(P.getDato());
+                    inicio = false;
+                    P = P.getLigaD();
+                }
+                else
+                {
+                    insertarFinal(P.getDato());
+                    inicio = true;
+                    P = P.getLigaD();
+                }
+            }
+        }
     }
 }

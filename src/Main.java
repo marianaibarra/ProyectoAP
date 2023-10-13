@@ -9,7 +9,9 @@ public class Main {
         Lista nuevaLista1 = new Lista();
         Lista nuevaLista2 = new Lista();
         Lista nuevaLista3 = new Lista();
-        ListaCircular listaCircular = new ListaCircular();
+        ListaCircular listaCircular1 = new ListaCircular();
+        ListaCircular listaCircular2 = new ListaCircular();
+        ListaCircular listaCircular3 = new ListaCircular();
         Scanner scan = new Scanner(System.in);
 
         do {
@@ -27,10 +29,12 @@ public class Main {
                     "11. Intercalado\n"+
                     "12. Comparar listas\n"+
                     "13. Porcentaje de menores al dato\n"+
-                    "14. Insertar final (lista circular) \n"+
-                    "15. Insertar dato en posición (Lista circular)\n"+
-                    "16. Eliminar consecutivos \n"+
-                    "17. Salir";
+                    "14. Insertar inicio (lista circular) \n"+
+                    "15. Insertar final (lista circular) \n"+
+                    "16. Insertar dato en posición (Lista circular)\n"+
+                    "17. Eliminar consecutivos \n"+
+                    "18. Insertar raro\n"+
+                    "19. Salir";
 
             String opcio = JOptionPane.showInputDialog(null, menu, "Menú de Opciones", JOptionPane.INFORMATION_MESSAGE);
             opcion = Integer.parseInt(opcio);
@@ -64,8 +68,11 @@ public class Main {
                     nuevaLista1.mostrarLista();
                     JOptionPane.showMessageDialog(null, "Lista 2:\n");
                     nuevaLista2.mostrarLista();
-                    JOptionPane.showMessageDialog(null, "Lista Circular:\n");
-                    listaCircular.mostrarListaCircular();
+                    JOptionPane.showMessageDialog(null, "Lista Circular 1:\n");
+                    listaCircular1.mostrarListaCircular();
+                    JOptionPane.showMessageDialog(null, "Lista Circular 2:\n");
+                    listaCircular2.mostrarListaCircular();
+
                     break;
                 case 4:
                     String ordenar = "¿Qué lista desea ordenar?\n" +
@@ -157,19 +164,39 @@ public class Main {
                     if (Listaporcent == 2) nuevaLista2.porcentajeMen(dato);
                     break;
                 case 14:
-                    String datoListaCircular = JOptionPane.showInputDialog("Inserte el dato");
-                    int datoLC = Integer.parseInt(datoListaCircular);
-
-                    listaCircular.insertarFinal(datoLC);
+                    String listaCircularinput = JOptionPane.showInputDialog("¿En que lista desea insertar?:\n" +
+                            "1. Lista circular 1\n" +
+                            "2. Lista circular 2\n" );
+                       int opcListaCircular = Integer.parseInt(listaCircularinput);
+                    String datoListaCircular = JOptionPane.showInputDialog("Ingrese el dato");
+                    dato = Integer.parseInt(datoListaCircular);
+                    if (opcListaCircular == 1) listaCircular1.insertarInicio(dato);
+                    if (opcListaCircular == 2) listaCircular2.insertarInicio(dato);
                     break;
                 case 15:
-                    String posicion = JOptionPane.showInputDialog("¿En que posición desea ingresar? (Index: 0) \n");
-                    int posicN = Integer.parseInt(posicion);
-                    String datoIngresar = JOptionPane.showInputDialog("Inserte dato");
-                    int datoI = Integer.parseInt(datoIngresar);
-                    listaCircular.ingresarEnPosicion(posicN, datoI);
+                    String listaCircularinputFinal = JOptionPane.showInputDialog("¿En que lista desea insertar?:\n" +
+                            "1. Lista circular 1\n" +
+                            "2. Lista circular 2\n" );
+                    int opcListaCircularFinal = Integer.parseInt(listaCircularinputFinal);
+                    String datoListaCircularFinal = JOptionPane.showInputDialog("Ingrese el dato");
+                    dato = Integer.parseInt(datoListaCircularFinal);
+                    if (opcListaCircularFinal == 1) listaCircular1.insertarFinal(dato);
+                    if (opcListaCircularFinal == 2) listaCircular2.insertarFinal(dato);
                     break;
                 case 16:
+                    String listaCircularinputPosicion = JOptionPane.showInputDialog("¿En que lista desea insertar?:\n" +
+                            "1. Lista circular 1\n" +
+                            "2. Lista circular 2\n" );
+                    int opcListaCircularPosicion = Integer.parseInt(listaCircularinputPosicion);
+                    String datoListaCircularPosicion = JOptionPane.showInputDialog("Ingrese el dato");
+                    dato = Integer.parseInt(datoListaCircularPosicion);
+                    String posicionListaCircular = JOptionPane.showInputDialog("Ingrese la posición");
+                    int posicion = Integer.parseInt(posicionListaCircular);
+                    if (opcListaCircularPosicion == 1) listaCircular1.ingresarEnPosicion(posicion, dato);
+                    if (opcListaCircularPosicion == 2) listaCircular2.ingresarEnPosicion(posicion, dato);
+
+                    break;
+                case 17:
                     String Eliminar_consecutivo = "¿En qué lista desea eliminar?\n" +
                             "1. Lista 1\n" +
                             "2. Lista 2\n";
@@ -179,14 +206,19 @@ public class Main {
                     if (opcionEliminar == 1) nuevaLista1.eliminarConsecutivos();
                     if (opcionEliminar == 2) nuevaLista2.eliminarConsecutivos();
                     break;
-                case 17:
+                case 18:
+                    listaCircular3 = new ListaCircular();
+                    listaCircular3.insertarRaro(listaCircular1, listaCircular2);
+                    listaCircular3.mostrarListaCircular();
+                    break;
+                case 19:
                     JOptionPane.showMessageDialog(null, "Salir");
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Opción inválida, vuelva a intentarlo");
                     break;
             }
-        } while (opcion != 17);
+        } while (opcion != 19);
         scan.close();
     }
 }
