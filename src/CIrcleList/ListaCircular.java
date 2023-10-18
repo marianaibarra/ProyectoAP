@@ -41,6 +41,7 @@ public class ListaCircular {
         }
         this.punta = X;
         P.setLigaD(this.punta);
+        this.punta.setLigaI(P);
     }
 
     public void insertarPosicionado (Nodo P, int dato) {
@@ -65,7 +66,6 @@ public class ListaCircular {
         }
         Nodo P = this.punta;
         Nodo Q = punta.getLigaI();
-
         P.setLigaI(X);
         Q.setLigaD(X);
         X.setLigaI(Q);
@@ -131,7 +131,6 @@ public class ListaCircular {
             insertarFinal(Q.getDato());
             P = P.getLigaD();
             Q = Q.getLigaI();
-
         } while(P != A.punta && Q != B.punta.getLigaI());
 
         if (P == A.punta);
