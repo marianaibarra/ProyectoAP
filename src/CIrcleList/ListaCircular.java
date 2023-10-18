@@ -21,10 +21,10 @@ public class ListaCircular {
     public void insertarInicio(int dato)
     {
         Nodo X = new Nodo(dato);
+        this.tamano++;
         if(this.punta == null)
         {
             this.punta = X;
-            this.tamano++;
             X.setLigaD(X);
             X.setLigaI(X);
             return;
@@ -54,28 +54,26 @@ public class ListaCircular {
     }
 
     public void insertarFinal (int dato) {
+        Nodo X = new Nodo(dato);
+
         if(this.punta == null) {
-            Nodo X = new Nodo(dato);
-            this.tamano++;
             this.punta = X;
             X.setLigaD(X);
             X.setLigaI(X);
+            this.tamano++;
             return;
         }
         Nodo P = this.punta;
-        Nodo Q = P.getLigaI();
-
-        Nodo X = new Nodo(dato);
-        this.tamano++;
+        Nodo Q = punta.getLigaI();
 
         P.setLigaI(X);
         Q.setLigaD(X);
         X.setLigaI(Q);
         X.setLigaD(P);
+        this.tamano++;
     }
 
     public void insertarRellenado (int veces, int dato) {
-
         for (int i = 0; i < veces; i++){
             insertarFinal(0);
         }

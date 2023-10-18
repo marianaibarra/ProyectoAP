@@ -72,7 +72,6 @@ public class Main {
                     listaCircular1.mostrarListaCircular();
                     JOptionPane.showMessageDialog(null, "Lista Circular 2:\n");
                     listaCircular2.mostrarListaCircular();
-
                     break;
                 case 4:
                     String ordenar = "¿Qué lista desea ordenar?\n" +
